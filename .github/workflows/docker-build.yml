@@ -11,9 +11,11 @@ permissions:
   contents: read
 jobs:
   test:
-    name: Test
+    name: Docker Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build container
+      - name: Build
         run: make build
+      - name: Smoke-Test
+        run: make smoke-test
