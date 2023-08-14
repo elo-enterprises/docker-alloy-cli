@@ -31,8 +31,17 @@ task downloadAlloyJar(type: Download) {
     outputs.file "lib/alloy4.2.jar"
 }
 
+task downloadJsonJar(type: Download) {
+    src  "https://repo1.maven.org/maven2/org/json/json/20190722/json-20190722.jar"
+    dest "lib/json.jar"
+    outputs.file "lib/json.jar"
+}
+
+
 dependencies {
-  implementation files("lib/alloy4.2.jar")
+    implementation files("lib/alloy4.2.jar")
+    implementation files("lib/json.jar")
 }
 
 compileKotlin.dependsOn(downloadAlloyJar)
+compileKotlin.dependsOn(downloadJsonJar)

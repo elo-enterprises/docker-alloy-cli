@@ -13,5 +13,3 @@ pred Puzzle {
 }
 
 run Puzzle for 10
-run Puzzle for 11
-run Puzzle for 12

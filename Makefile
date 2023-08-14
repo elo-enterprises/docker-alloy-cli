@@ -1,7 +1,7 @@
 ##
 #
 ##
-NAME ?= alloy-cli
+DOCKER_IMAGE_NAME ?= alloy-cli
 
 all: build
 build: docker-build
@@ -10,16 +10,23 @@ shell: docker-shell
 test: smoke-test 
 
 docker-clean:
-	docker rmi $(NAME) >/dev/null || true
+	docker rmi $(DOCKER_IMAGE_NAME) >/dev/null || true
 
 docker-build:	
-	docker build --no-cache -t $(NAME) .
+	docker build -t $(DOCKER_IMAGE_NAME) .
 
 docker-shell:
 	docker run -it --rm -v `pwd`:/workspace -w /workspace \
-		--entrypoint bash $(NAME)
+		--entrypoint bash $(DOCKER_IMAGE_NAME)
 
 smoke-test:
-	docker run --rm -v `pwd`:/workspace -w /workspace \
-		--entrypoint bash $(NAME) \
-		-c 'alloy-run tests/knights.als'
+	bash -x -c "\
+		docker run --rm -v `pwd`:/workspace -w /workspace \
+			$(DOCKER_IMAGE_NAME) tests/knights-satisfiable.als; \
+	! docker run --rm -v `pwd`:/workspace -w /workspace \
+		$(DOCKER_IMAGE_NAME) tests/knights-unsatisfiable.als"
+		
+#RUN mkdir /opt/jpype 
+#COPY requirements.txt /opt/jpype
+#COPY app.py /opt/jpype
+#RUN pip3 install -r /opt/jpype/requirements.txt 

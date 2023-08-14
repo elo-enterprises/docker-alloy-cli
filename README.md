@@ -21,14 +21,14 @@
 
 Command line interface for [Alloy Analyzer][alloy].
 
-Runs all actions (`run` or `check`) in a given .als file and prints their results.
-Outputs are in the format of [Test Anything Protocol][tap].
+Runs all actions (`run` or `check`) in a given `.als` file and returns JSON from the solver.  
+Example usage
 
 -------------------------------------------------------------------------------
 
 ## Installation
 
-See also the [upstream docs](https://github.com/motemen/kt-alloy-cli) for details about native installation.  
+(See also the [upstream docs](https://github.com/motemen/kt-alloy-cli) for details about native installation.)
 
 ```bash 
 $ ./gradelw distTar
@@ -51,33 +51,65 @@ $ docker pull ...
 
 ## Usage 
 
+See the [Installation](#installation) section for details about native install, but recommended usage is with docker:
 
 ```bash 
 
-$ alloy-run [-V] <file.als>
+# Use image on dockerhub
+$ docker run eloengineering/alloy-cli -v `pwd`:/workspace -w /workspace tests/knights-satisfiable.als
+
+# Or Build/run from this repo
+$ make build
+$ docker run alloy-cli -v `pwd`:/workspace -w /workspace tests/knights-satisfiable.als
 ```
 
-For example:
+**When the solver is successful,** output is JSON:
+
+```json 
+
+{"Run Puzzle for 10": [[
+  {
+    "tuple": {"atom": {"label": "Knave$0"}},
+    "types": {"type": {"ID": 5}},
+    "label": "$Puzzle_A",
+    "ID": 7
+  },
+  {
+    "tuple": {"atom": {"label": "Knight$0"}},
+    "types": {"type": {"ID": 5}},
+    "label": "$Puzzle_B",
+    "ID": 8
+  }
+]]}
 
 ```
-    % alloy-run alloy-sketches/oauth2/oauth2.als
-    1..3
-    ok 1 - Run show for 6 but 1 AuthorizationServer, 1 Client
-    ok 2 - Run allUserAgentsAreEventuallyAuthorized for 6 but exactly 1 AuthorizationServer, exactly 1 Client, 2 UserAgent
-    not ok 3 - Check userAgentsAreProperlyAuthorized for 6 but exactly 1 AuthorizationServer, exactly 1 Client, 2 UserAgent
+
+**In case the solver is unsuccessful,** invocation throws code 2 and output like this:
+
+```bash
+
+$ docker run --rm -v `pwd`:/workspace -w /workspace \
+  alloy-cli tests/knights-unsatisfiable.als
+
+---OUTCOME---
+Unsatisfiable.
+
+Exception in thread "main" API usage error:
+This solution is unsatisfiable.
+	at edu.mit.csail.sdg.alloy4compiler.translator.A4SolutionWriter.writeInstance(A4SolutionWriter.java:210)
+	at edu.mit.csail.sdg.alloy4compiler.translator.A4Solution.writeXML(A4Solution.java:1134)
+	at edu.mit.csail.sdg.alloy4compiler.translator.A4Solution.writeXML(A4Solution.java:1111)
+	at edu.mit.csail.sdg.alloy4compiler.translator.A4Solution.writeXML(A4Solution.java:1098)
+	at MainKt.main(main.kt:54)
 ```
 
-If `-V` option is given, shows graphical representations of found counterexamples.
+See also the [smoke-test target](Makefile).
 
-To use the docker-container run commands like this:
+-------------------------------------------------------------------------------
 
-```bash 
-
-$ docker run ...
-```
+## Releases 
 
 See [dockerhub for releases](https://hub.docker.com/r/eloengineering/alloy-cli/tags).
-
 
 -------------------------------------------------------------------------------
 
@@ -99,15 +131,14 @@ make shell
 
 ## Other Resources 
 
+This is a fork of [motemen/kt-alloy-cli](https://github.com/motemen/kt-alloy-cli), which returns results compatible with [test-anything protocol](https://testanything.org/).
+
 ### Official Docs 
 
 * https://alloy.readthedocs.io
 * http://alloytools.org/documentation/alloy-api/index.html
 * http://alloy.mit.edu/alloy/
 
-### Upstream of this fork
-
-* https://github.com/motemen/kt-alloy-cli
 
 ### Running the alloy analyzer GUI from docker
 
@@ -125,7 +156,6 @@ docker run -v `pwd`:/workspace -e DISPLAY=host.docker.internal:0 jessitron/alloy
 
 * https://hustleplay.wordpress.com/2010/02/18/jpype-tutorial/
 * https://jpype.readthedocs.io/en/latest/install.html
-* https://testanything.org/
 
 -------------------------------------------------------------------------------
 
