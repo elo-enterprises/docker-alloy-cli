@@ -51,7 +51,7 @@ $ docker pull ...
 
 ## Usage 
 
-See the [Installation](#installation) section for details about native install, but recommended usage is with docker:
+See the [Installation](#installation) section for details about native install, but recommended usage is with docker.  (The examples below use the sample alloy-lang files in the [tests/ folder](tests/).)
 
 ```bash 
 
@@ -63,9 +63,30 @@ $ make build
 $ docker run alloy-cli -v `pwd`:/workspace -w /workspace tests/knights-satisfiable.als
 ```
 
-**When the solver is successful,** output is JSON:
+## Output 
 
-```json 
+### On Success 
+
+**When the solver is successful,** stderr output is human-friendly: 
+
+```
+---INSTANCE---
+integers={}
+univ={Knight$0, Knave$0}
+Int={}
+seq/Int={}
+String={}
+none={}
+this/Knight={Knight$0}
+this/Knave={Knave$0}
+this/Person={Knight$0, Knave$0}
+skolem $Puzzle_A={Knave$0}
+skolem $Puzzle_B={Knight$0}
+```
+
+ Meanwhile stdout is machine-friendly JSON, in case you want to pass it downstream.  
+
+```json
 
 {"Run Puzzle for 10": [[
   {
@@ -83,6 +104,8 @@ $ docker run alloy-cli -v `pwd`:/workspace -w /workspace tests/knights-satisfiab
 ]]}
 
 ```
+
+### On Error
 
 **In case the solver is unsuccessful,** invocation throws code 2 and output like this:
 
@@ -103,7 +126,7 @@ This solution is unsatisfiable.
 	at MainKt.main(main.kt:54)
 ```
 
-See also the [smoke-test target](Makefile).
+See also the [smoke-test target in project automation](Makefile).
 
 -------------------------------------------------------------------------------
 
@@ -133,29 +156,19 @@ make shell
 
 This is a fork of [motemen/kt-alloy-cli](https://github.com/motemen/kt-alloy-cli), which returns results compatible with [test-anything protocol](https://testanything.org/).
 
-### Official Docs 
+See also the [Alloy-lang docs](https://alloy.readthedocs.io), [API docs](http://alloytools.org/documentation/alloy-api/index.html), or [project page](http://alloy.mit.edu/alloy/).
 
-* https://alloy.readthedocs.io
-* http://alloytools.org/documentation/alloy-api/index.html
-* http://alloy.mit.edu/alloy/
+Running the alloy analyzer GUI from docker is also possible, but can be problematic:
 
-
-### Running the alloy analyzer GUI from docker
-
-See also:
-
-* https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088
-* https://gist.github.com/cschiewek/246a244ba23da8b9f0e7b11a68bf3285
-* https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949
-* https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/ and 
-
-```bash
+```
+# https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/
 docker run -v `pwd`:/workspace -e DISPLAY=host.docker.internal:0 jessitron/alloy:5.1
 ```
-### Misc 
 
-* https://hustleplay.wordpress.com/2010/02/18/jpype-tutorial/
-* https://jpype.readthedocs.io/en/latest/install.html
+
+See also [1](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088), [2](https://gist.github.com/cschiewek/246a244ba23da8b9f0e7b11a68bf3285), and [3](https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949) for stuff that might help for MacOS.
+
+See [arby](#placeholder) for an embedding of alloy-lang in ruby.  See [1](https://hustleplay.wordpress.com/2010/02/18/jpype-tutorial/),[2](https://jpype.readthedocs.io/en/latest/install.html) for stuff that might help with python inter-op.
 
 -------------------------------------------------------------------------------
 
