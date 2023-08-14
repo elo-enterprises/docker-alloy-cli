@@ -20,6 +20,6 @@ docker-shell:
 		--entrypoint bash $(NAME)
 
 smoke-test:
-	docker run -it --rm -v `pwd`:/workspace -w /workspace \
+	docker run --rm -v `pwd`:/workspace -w /workspace \
 		--entrypoint bash $(NAME) \
 		-c 'alloy-run tests/knights.als'
