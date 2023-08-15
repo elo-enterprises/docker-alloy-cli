@@ -17,17 +17,17 @@
 </table>
 
 -------------------------------------------------------------------------------
-[<img src="https://github.com/elo-enterprises/docker-alloy-cli/actions/workflows/docker-build-push.yml/badge.svg">](#)
-[<img src="https://img.shields.io/badge/dockerhub-4.2-blue.svg?logo=Docker">](https://hub.docker.com/r/eloengineering/alloy-cli/tags) 
+<img src="https://github.com/elo-enterprises/docker-alloy-cli/actions/workflows/docker-build-push.yml/badge.svg"> [<img src="https://img.shields.io/badge/dockerhub-4.2-blue.svg?logo=Docker">](https://hub.docker.com/r/eloengineering/alloy-cli/tags) <img src="https://img.shields.io/badge/debian-bookworm-orange"> <img src="https://img.shields.io/badge/kotlin-1.6.21-orange">
 
   * [Overview](#overview)
-  * [Installation](#installation)
   * [Usage](#usage)
   * [Output](#output)
     * [On Success](#on-success)
     * [On Error](#on-error)
   * [Releases](#releases)
   * [Development](#development)
+    * [For Docker](#for-docker)
+    * [Native Installation](#native-installation)
   * [Other Resources](#other-resources)
 
 
@@ -41,29 +41,6 @@ This runs all actions (`run` or `check`) in a given `.als` file and returns JSON
 
 -------------------------------------------------------------------------------
 
-## Installation
-
-(See also the [upstream docs](https://github.com/motemen/kt-alloy-cli) for details about native installation.)
-
-```bash 
-$ ./gradelw distTar
-```
-
-Then extract ./build/distributions/kt-alloy-cli.tar somewhere and place a file named `alloy-run` under PATH with its contents:
-
-```
-#!/bin/bash
-exec path/to/bin/kt-alloy-cli "$@"
-```
-
-Or, to use the docker-container:
-
-```bash
-$ docker pull ...
-```
-
--------------------------------------------------------------------------------
-
 ## Usage 
 
 See the [Installation](#installation) section for details about native install, but recommended usage is with docker.  (The examples below use the sample alloy-lang files in the [tests/ folder](tests/).)
@@ -71,11 +48,11 @@ See the [Installation](#installation) section for details about native install, 
 ```bash 
 
 # Use image on dockerhub
-$ docker run eloengineering/alloy-cli -v `pwd`:/workspace -w /workspace tests/knights-satisfiable.als
+$ docker run  --rm -v `pwd`:/workspace -w /workspace eloengineering/alloy-cli:4.2 tests/knights-satisfiable.als
 
 # Or Build/run from this repo
 $ make build
-$ docker run alloy-cli -v `pwd`:/workspace -w /workspace tests/knights-satisfiable.als
+$ docker run  --rm -v `pwd`:/workspace -w /workspace alloy-cli tests/knights-satisfiable.als
 ```
 
 ## Output 
@@ -126,8 +103,7 @@ skolem $Puzzle_B={Knight$0}
 
 ```bash
 
-$ docker run --rm -v `pwd`:/workspace -w /workspace \
-  alloy-cli tests/knights-unsatisfiable.als
+$ docker run --rm -v `pwd`:/workspace -w /workspace alloy-cli tests/knights-unsatisfiable.als
 
 ---OUTCOME---
 Unsatisfiable.
@@ -153,6 +129,8 @@ See [dockerhub for releases](https://hub.docker.com/r/eloengineering/alloy-cli/t
 
 ## Development
 
+### For Docker 
+
 ```bash
 
 # build the docker container 
@@ -163,6 +141,21 @@ make test
 
 # drop into debugging shell inside the container
 make shell
+```
+
+### Native Installation
+
+(See also the [upstream docs](https://github.com/motemen/kt-alloy-cli) for details about native installation.)
+
+```bash 
+$ ./gradelw distTar
+```
+
+Then extract ./build/distributions/kt-alloy-cli.tar somewhere and place a file named `alloy-run` under PATH with its contents:
+
+```
+#!/bin/bash
+exec path/to/bin/kt-alloy-cli "$@"
 ```
 
 -------------------------------------------------------------------------------

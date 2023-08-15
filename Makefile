@@ -1,6 +1,3 @@
-##
-#
-##
 DOCKER_IMAGE_NAME ?= alloy-cli
 
 all: build
@@ -21,12 +18,6 @@ docker-shell:
 
 smoke-test:
 	bash -x -c "\
-		docker run --rm -v `pwd`:/workspace -w /workspace \
-			$(DOCKER_IMAGE_NAME) tests/knights-satisfiable.als; \
+		docker run --rm -v `pwd`:/workspace -w /workspace $(DOCKER_IMAGE_NAME) tests/knights-satisfiable.als; \
 	! docker run --rm -v `pwd`:/workspace -w /workspace \
 		$(DOCKER_IMAGE_NAME) tests/knights-unsatisfiable.als"
-		
-#RUN mkdir /opt/jpype 
-#COPY requirements.txt /opt/jpype
-#COPY app.py /opt/jpype
-#RUN pip3 install -r /opt/jpype/requirements.txt 
