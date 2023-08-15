@@ -48,5 +48,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: 
+            - eloengineering/alloy-cli:latest
+            - eloengineering/alloy-cli:4.2
+            - eloengineering/alloy-cli:4.2_2015-02-22
           labels: ${{ steps.meta.outputs.labels }}

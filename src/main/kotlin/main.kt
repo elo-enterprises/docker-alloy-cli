@@ -50,7 +50,7 @@ fun main(args: Array<String>) {
             val command = commands[i]
             val solution = TranslateAlloyToKodkod.execute_command(reporter, world.allReachableSigs, command, options);
             java.lang.System.err.println(solution.toString())
-            val fileName = "bonk.xml";
+            val fileName = ".tmp.alloy.xml";
             solution.writeXML(fileName);
             val f = File(fileName).readText();
             val jsonObj = XML.toJSONObject(f);
