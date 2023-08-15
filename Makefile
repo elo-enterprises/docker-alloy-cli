@@ -17,7 +17,7 @@ docker-shell:
 		--entrypoint bash $(DOCKER_IMAGE_NAME)
 
 smoke-test:
-	bash -x -c "\
-		docker run --rm -v `pwd`:/workspace -w /workspace $(DOCKER_IMAGE_NAME) tests/knights-satisfiable.als; \
+	docker run --rm -v `pwd`:/workspace -w /workspace \
+		$(DOCKER_IMAGE_NAME) tests/knights-satisfiable.als; \
 	! docker run --rm -v `pwd`:/workspace -w /workspace \
-		$(DOCKER_IMAGE_NAME) tests/knights-unsatisfiable.als"
+		$(DOCKER_IMAGE_NAME) tests/knights-unsatisfiable.als

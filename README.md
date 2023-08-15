@@ -164,7 +164,7 @@ exec path/to/bin/kt-alloy-cli "$@"
 
 This is a fork of [motemen/kt-alloy-cli](https://github.com/motemen/kt-alloy-cli), which returns results compatible with [test-anything protocol](https://testanything.org/).
 
-See also the [Alloy-lang docs](https://alloy.readthedocs.io), [API docs](http://alloytools.org/documentation/alloy-api/index.html), or [project page](http://alloy.mit.edu/alloy/).
+See also the [Alloy-lang docs](https://alloy.readthedocs.io), [API docs](http://alloytools.org/documentation/alloy-api/index.html), or [project page](http://alloy.mit.edu/alloy/).  For some example code that's using the alloy compiler, see [this code](http://alloytools.org/documentation/code/ExampleUsingTheCompiler.java.html).
 
 Running the alloy analyzer GUI from docker is also possible, but can be problematic:
 
@@ -172,7 +172,6 @@ Running the alloy analyzer GUI from docker is also possible, but can be problema
 # https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/
 docker run -v `pwd`:/workspace -e DISPLAY=host.docker.internal:0 jessitron/alloy:5.1
 ```
-
 
 See also [1](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088), [2](https://gist.github.com/cschiewek/246a244ba23da8b9f0e7b11a68bf3285), and [3](https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949) for stuff that might help for MacOS.
 
