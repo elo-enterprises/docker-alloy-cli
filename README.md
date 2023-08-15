@@ -10,7 +10,7 @@
   <tr>
     <td width=15%><img src=img/icon.png style="width:150px"></td>
     <td>
-      A fork of <a href=https://github.com/motemen/kt-alloy-cli>alloy-cli</a> with small changes for JSON output, plus added dockerization.
+      CLI runner for the <a href=https://alloy.readthedocs.io>alloy specification language</a>.  Returns JSON for the solver output, and runs from docker so you don't need a java stack.
     </td>
   </tr>
 </table>
@@ -32,10 +32,9 @@
 
 ## Overview 
 
-Command line interface for [Alloy Analyzer][alloy].
+A CLI for running the [Alloy Analyzer][http://alloytools.org/].
 
-Runs all actions (`run` or `check`) in a given `.als` file and returns JSON from the solver.  
-Example usage
+This runs all actions (`run` or `check`) in a given `.als` file and returns JSON from the solver.  
 
 -------------------------------------------------------------------------------
 
@@ -181,7 +180,7 @@ docker run -v `pwd`:/workspace -e DISPLAY=host.docker.internal:0 jessitron/alloy
 
 See also [1](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088), [2](https://gist.github.com/cschiewek/246a244ba23da8b9f0e7b11a68bf3285), and [3](https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949) for stuff that might help for MacOS.
 
-See [arby](#placeholder) for an embedding of alloy-lang in ruby.  See [1](https://hustleplay.wordpress.com/2010/02/18/jpype-tutorial/),[2](https://jpype.readthedocs.io/en/latest/install.html) for stuff that might help with python inter-op.
+See [arby](https://aleksandarmilicevic.github.io/arby/) for an embedding of alloy-lang in ruby.  See [1](https://hustleplay.wordpress.com/2010/02/18/jpype-tutorial/),[2](https://jpype.readthedocs.io/en/latest/install.html) for stuff that might help with python inter-op.
 
 -------------------------------------------------------------------------------
 
