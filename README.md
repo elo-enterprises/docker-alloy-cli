@@ -10,12 +10,14 @@
   <tr>
     <td width=15%><img src=img/icon.png style="width:150px"></td>
     <td>
-      CLI runner for the <a href=https://alloy.readthedocs.io>alloy specification language</a>.  Returns JSON for the solver output, and runs from docker so you don't need a java stack.
+      CLI runner for the <a href=https://alloy.readthedocs.io>alloy specification language</a>.  
+      <br/>Returns JSON for the solver output, and runs from docker so you don't need a java stack.
     </td>
   </tr>
 </table>
 
 -------------------------------------------------------------------------------
+[build](https://github.com/github/docs/actions/workflows/docker-build-push.yml/badge.svg) [<img src="https://img.shields.io/badge/dockerhub-4.2-blue.svg?logo=Docker">](https://hub.docker.com/r/eloengineering/alloy-cli/tags) 
 
   * [Overview](#overview)
   * [Installation](#installation)
@@ -32,7 +34,7 @@
 
 ## Overview 
 
-A CLI for running the [Alloy Analyzer][http://alloytools.org/].
+A CLI for running the [Alloy Analyzer](http://alloytools.org/).
 
 This runs all actions (`run` or `check`) in a given `.als` file and returns JSON from the solver.  
 

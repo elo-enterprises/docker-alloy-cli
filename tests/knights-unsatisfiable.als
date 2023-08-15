@@ -12,4 +12,5 @@ pred Puzzle {
   }
 }
 
+// set the allowed steps here so that puzzle is unsatisfiable.
 run Puzzle for 1
