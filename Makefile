@@ -5,7 +5,8 @@ build: docker-build
 clean: docker-clean
 shell: docker-shell 
 test: smoke-test 
-
+docs:
+	pynchon jinja apply
 docker-clean:
 	docker rmi $(DOCKER_IMAGE_NAME) >/dev/null || true
 

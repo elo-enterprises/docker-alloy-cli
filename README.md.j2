@@ -33,7 +33,9 @@ This runs all actions (`run` or `check`) in a given `.als` file and returns JSON
 
 ## Usage 
 
-See the [Installation](#installation) section for details about native install, but recommended usage is with docker.  (The examples below use the sample alloy-lang files in the [tests/ folder](tests/).)
+See the [Installation](#installation) section for details about native install, but recommended usage is with docker.  (The examples below use the sample alloy-lang files in the [tests/ folder](tests/),
+taken from [this post](https://www.hillelwayne.com/post/knights-knaves/))
+
 
 ```bash 
 
@@ -66,7 +68,7 @@ skolem $Puzzle_A={Knave$0}
 skolem $Puzzle_B={Knight$0}
 ```
 
- Meanwhile stdout is machine-friendly JSON, in case you want to pass it downstream.  
+Meanwhile stdout is machine-friendly JSON, in case you want to pass it downstream to other programs.  
 
 ```json
 
